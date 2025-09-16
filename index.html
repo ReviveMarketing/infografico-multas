@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Soluções para CNH e Multas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #073B4C;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #FFD166;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-white antialiased">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#FFD166]">Defenda seu Direito de Dirigir</h1>
+            <p class="text-lg md:text-xl mt-4 max-w-3xl mx-auto text-gray-200">Oferecemos soluções práticas e rápidas para Suspensão de CNH e Revisão de Multas em Santa Catarina.</p>
+        </header>
+
+        <main>
+            <section id="services" class="mb-16">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-white">Nossos Serviços</h2>
+                    <p class="text-gray-300 mt-2">Entenda como podemos ajudar a resolver seus problemas com a CNH e multas de trânsito.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-[#118AB2] p-8 rounded-2xl shadow-2xl border-2 border-[#06D6A0]">
+                        <h3 class="text-2xl font-bold mb-4 text-[#FFD166]">🚦 Suspensão de CNH</h3>
+                        <p class="text-gray-200">Seu direito de dirigir está em risco? Todo condutor tem direito à defesa. Cuidamos de todo o processo, seja administrativo ou judicial, para garantir que você continue dirigindo. Analisamos cada detalhe para construir a melhor estratégia para o seu caso.</p>
+                    </div>
+                    <div class="bg-[#118AB2] p-8 rounded-2xl shadow-2xl border-2 border-[#FF6B6B]">
+                        <h3 class="text-2xl font-bold mb-4 text-[#FFD166]">📄 Revisão de Multas</h3>
+                        <p class="text-gray-200">Recebeu uma multa grave ou gravíssima acima de R$ 500,00? Nossa equipe é especialista em encontrar inconsistências e erros formais nos autos de infração que podem levar à anulação da multa e dos pontos na sua CNH.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="process" class="mb-16">
+                 <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-white">Como Funciona Nosso Processo?</h2>
+                    <p class="text-gray-300 mt-2">Temos um fluxo de trabalho transparente, do início ao fim.</p>
+                </div>
+                <div class="bg-[#073B4C] border-2 border-[#118AB2] p-8 rounded-2xl shadow-2xl">
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-8">
+                        <div class="text-center flex-1">
+                            <div class="text-4xl mb-2">1</div>
+                            <h4 class="text-xl font-semibold mb-2 text-[#06D6A0]">Consulta e Análise</h4>
+                            <p class="text-gray-300">Acessamos sua situação via Gov.br ou protocolo da multa para uma análise completa de prazos e possibilidades.</p>
+                        </div>
+                        <div class="text-5xl text-[#118AB2] hidden md:block">→</div>
+                         <div class="text-5xl text-[#118AB2] md:hidden">↓</div>
+                        <div class="text-center flex-1">
+                            <div class="text-4xl mb-2">2</div>
+                            <h4 class="text-xl font-semibold mb-2 text-[#06D6A0]">Defesa Administrativa</h4>
+                            <p class="text-gray-300">Atuamos nas 3 instâncias de defesa, com prazos de 30 dias por fase, buscando a anulação na via administrativa.</p>
+                        </div>
+                        <div class="text-5xl text-[#118AB2] hidden md:block">→</div>
+                         <div class="text-5xl text-[#118AB2] md:hidden">↓</div>
+                        <div class="text-center flex-1">
+                            <div class="text-4xl mb-2">3</div>
+                            <h4 class="text-xl font-semibold mb-2 text-[#06D6A0]">Ação Judicial</h4>
+                            <p class="text-gray-300">Caso a via administrativa se esgote, partimos para a ação judicial, focando em inconsistências para obter êxito.</p>
+                        </div>
+                    </div>
+                     <div class="mt-8 text-center bg-[#118AB2] p-4 rounded-lg">
+                        <p class="font-bold text-lg text-white"><span class="text-2xl mr-2">💡</span>Fato Importante: O DETRAN tem até 5 anos para instaurar o processo de suspensão. Sempre há tempo para uma boa defesa!</p>
+                    </div>
+                </div>
+            </section>
+
+             <section id="gemini-tools" class="mb-16">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-white">Ferramentas com IA ✨</h2>
+                    <p class="text-gray-300 mt-2">Use nossa inteligência artificial para obter análises e respostas instantâneas.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-[#118AB2] p-8 rounded-2xl shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-[#FFD166]">Analisador de Multa</h3>
+                        <p class="text-gray-200 mb-4">Cole o texto do seu auto de infração abaixo e nossa IA irá analisar em busca de possíveis erros para sua defesa.</p>
+                        <textarea id="ticket-text" rows="6" class="w-full p-3 rounded-lg bg-[#073B4C] text-white placeholder-gray-400 border-2 border-transparent focus:border-[#FFD166] focus:outline-none" placeholder="Cole o texto completo do auto de infração aqui..."></textarea>
+                        <button id="analyze-btn" class="w-full mt-4 bg-[#06D6A0] text-[#073B4C] font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">Analisar com IA ✨</button>
+                        <div id="analysis-loader" class="hidden justify-center mt-4"><div class="spinner"></div></div>
+                        <div id="analysis-result" class="mt-4 p-4 bg-[#073B4C] rounded-lg text-gray-200 hidden"></div>
+                    </div>
+                    <div class="bg-[#118AB2] p-8 rounded-2xl shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-[#FFD166]">Consultor Virtual</h3>
+                        <p class="text-gray-200 mb-4">Tem alguma dúvida sobre leis de trânsito, pontos na CNH ou prazos? Pergunte ao nosso consultor virtual.</p>
+                        <input type="text" id="consultant-question" class="w-full p-3 rounded-lg bg-[#073B4C] text-white placeholder-gray-400 border-2 border-transparent focus:border-[#FFD166] focus:outline-none" placeholder="Ex: Quantos pontos gera a multa por celular?">
+                        <button id="ask-btn" class="w-full mt-4 bg-[#06D6A0] text-[#073B4C] font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">Perguntar ao Consultor ✨</button>
+                        <div id="consultant-loader" class="hidden justify-center mt-4"><div class="spinner"></div></div>
+                        <div id="consultant-result" class="mt-4 p-4 bg-[#073B4C] rounded-lg text-gray-200 hidden"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="clients-values" class="mb-16">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-[#118AB2] p-8 rounded-2xl shadow-2xl">
+                        <h2 class="text-3xl font-bold text-center mb-6 text-white">Nosso Público-Alvo</h2>
+                        <p class="text-center text-gray-300 mb-6">Atendemos uma gama diversificada de motoristas que dependem de sua CNH para o trabalho e para o dia a dia. Este gráfico mostra a distribuição dos nossos principais perfis de clientes.</p>
+                        <div class="chart-container">
+                            <canvas id="clientProfileChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#118AB2] p-8 rounded-2xl shadow-2xl">
+                        <h2 class="text-3xl font-bold text-center mb-6 text-white">Comparativo de Investimentos</h2>
+                         <p class="text-center text-gray-300 mb-6">Oferecemos diferentes níveis de serviço para a suspensão da CNH, com valores claros e transparentes. Este gráfico compara os custos de cada abordagem de defesa.</p>
+                        <div class="chart-container">
+                            <canvas id="serviceValuesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="alternatives-docs" class="mb-16">
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                     <div class="bg-[#073B4C] border-2 border-[#118AB2] p-8 rounded-2xl shadow-2xl text-center">
+                        <h3 class="text-2xl font-bold mb-4 text-[#FFD166]">📘 Solução Alternativa "Faça Você Mesmo"</h3>
+                        <p class="text-gray-200 mb-4">Para multas de valor inferior a R$ 500,00, oferecemos uma solução econômica e eficaz. Nosso E-book detalha o passo a passo para você mesmo realizar sua defesa.</p>
+                        <div class="bg-[#FFD166] text-[#073B4C] font-bold text-3xl py-3 px-6 rounded-lg inline-block">
+                            Apenas R$ 49,90
+                        </div>
+                    </div>
+                    <div class="bg-[#073B4C] border-2 border-[#118AB2] p-8 rounded-2xl shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-[#FFD166]">📝 Documentos para Começar</h3>
+                        <ul class="list-none space-y-3 text-gray-200">
+                            <li class="flex items-center"><span class="text-[#06D6A0] text-2xl mr-3">✔</span> Senha Gov.br ou Protocolo da multa</li>
+                            <li class="flex items-center"><span class="text-[#06D6A0] text-2xl mr-3">✔</span> CNH (Carteira Nacional de Habilitação)</li>
+                            <li class="flex items-center"><span class="text-[#06D6A0] text-2xl mr-3">✔</span> Comprovante de residência</li>
+                            <li class="flex items-center"><span class="text-[#06D6A0] text-2xl mr-3">✔</span> Procuração e Contrato (fornecidos por nós)</li>
+                        </ul>
+                    </div>
+                 </div>
+            </section>
+        </main>
+
+        <footer class="text-center py-8 mt-8 border-t border-gray-700">
+            <p class="text-gray-300">Central de Pequenas Causas - Protegendo seu direito de dirigir.</p>
+            <p class="text-gray-400 text-sm mt-2">Não perca sua CNH! Fale conosco e resolva seu problema.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const apiKey = ""; 
+
+            const analyzeBtn = document.getElementById('analyze-btn');
+            const ticketText = document.getElementById('ticket-text');
+            const analysisLoader = document.getElementById('analysis-loader');
+            const analysisResult = document.getElementById('analysis-result');
+
+            const askBtn = document.getElementById('ask-btn');
+            const consultantQuestion = document.getElementById('consultant-question');
+            const consultantLoader = document.getElementById('consultant-loader');
+            const consultantResult = document.getElementById('consultant-result');
+
+            async function callGeminiAPI(payload, loader, resultElement, buttonElement) {
+                loader.style.display = 'flex';
+                resultElement.style.display = 'none';
+                buttonElement.disabled = true;
+
+                try {
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                    
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+                    let text = "Não foi possível obter uma resposta. Tente novamente.";
+                    
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        text = candidate.content.parts[0].text;
+                    }
+                    
+                    resultElement.innerHTML = formatResponseText(text);
+                    resultElement.style.display = 'block';
+
+                } catch (error) {
+                    resultElement.innerText = 'Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.';
+                    resultElement.style.display = 'block';
+                    console.error("Gemini API call failed:", error);
+                } finally {
+                    loader.style.display = 'none';
+                    buttonElement.disabled = false;
+                }
+            }
+            
+            function formatResponseText(text) {
+                return text
+                    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#FFD166]">$1</strong>') // Bold
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italics
+                    .replace(/\n/g, '<br>'); // Newlines
+            }
+
+            analyzeBtn.addEventListener('click', () => {
+                const ticketContent = ticketText.value.trim();
+                if (!ticketContent) {
+                    analysisResult.innerText = 'Por favor, insira o texto do auto de infração.';
+                    analysisResult.style.display = 'block';
+                    return;
+                }
+                const systemPrompt = "Você é um especialista em legislação de trânsito brasileira, com foco em Santa Catarina. Aja como um assistente que ajuda motoristas a entenderem suas multas. Seja objetivo e profissional.";
+                const userQuery = `Analise o seguinte texto de um auto de infração de trânsito. Identifique em tópicos curtos e claros, possíveis erros formais, inconsistências ou argumentos que poderiam ser usados em uma defesa administrativa. Se não encontrar erros óbvios, informe que o auto parece estar correto, mas que uma análise profissional é recomendada. Texto da multa: "${ticketContent}"`;
+                
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                };
+
+                callGeminiAPI(payload, analysisLoader, analysisResult, analyzeBtn);
+            });
+
+            askBtn.addEventListener('click', () => {
+                const question = consultantQuestion.value.trim();
+                if (!question) {
+                    consultantResult.innerText = 'Por favor, digite sua pergunta.';
+                    consultantResult.style.display = 'block';
+                    return;
+                }
+                const systemPrompt = "Você é um consultor virtual especialista em legislação de trânsito do Brasil. Forneça respostas claras, diretas e concisas. Baseie suas respostas nas informações mais atuais disponíveis.";
+                const userQuery = `Responda a seguinte pergunta sobre trânsito: "${question}"`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                    tools: [{ "google_search": {} }],
+                };
+
+                callGeminiAPI(payload, consultantLoader, consultantResult, askBtn);
+            });
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+
+            const defaultChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#FFFFFF',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            };
+
+            const clientProfileCtx = document.getElementById('clientProfileChart').getContext('2d');
+            new Chart(clientProfileCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Motoristas Profissionais', 'Dependentes do Veículo', 'Condutores com Multas Graves'],
+                    datasets: [{
+                        label: 'Perfil de Clientes',
+                        data: [33.3, 33.3, 33.3],
+                        backgroundColor: ['#FF6B6B', '#FFD166', '#06D6A0'],
+                        borderColor: '#118AB2',
+                        borderWidth: 3
+                    }]
+                },
+                options: { ...defaultChartOptions }
+            });
+
+            const serviceValuesCtx = document.getElementById('serviceValuesChart').getContext('2d');
+            new Chart(serviceValuesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Defesa ADM', 'Ação Judicial', 'Medidas Urgentes'],
+                    datasets: [{
+                        label: 'Valor do Serviço (R$)',
+                        data: [2000, 3000, 5000],
+                        backgroundColor: ['#06D6A0', '#FFD166', '#FF6B6B'],
+                        borderColor: '#073B4C',
+                        borderWidth: 2,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    ...defaultChartOptions,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#FFFFFF',
+                                callback: function(value) {
+                                    return 'R$ ' + value;
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.2)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#FFFFFF'
+                            },
+                             grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
