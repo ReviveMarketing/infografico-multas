@@ -40,6 +40,15 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="text-white antialiased">
@@ -52,7 +61,7 @@
         </header>
 
         <main>
-            <section id="services" class="mb-16">
+            <section id="services" class="mb-16 fade-in">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl font-bold text-white">Nossos Serviços</h2>
                     <p class="text-gray-300 mt-2">Entenda como podemos ajudar a resolver seus problemas com a CNH e multas de trânsito.</p>
@@ -69,7 +78,7 @@
                 </div>
             </section>
 
-            <section id="process" class="mb-16">
+            <section id="process" class="mb-16 fade-in">
                  <div class="text-center mb-10">
                     <h2 class="text-3xl font-bold text-white">Como Funciona Nosso Processo?</h2>
                     <p class="text-gray-300 mt-2">Temos um fluxo de trabalho transparente, do início ao fim.</p>
@@ -102,7 +111,7 @@
                 </div>
             </section>
 
-             <section id="gemini-tools" class="mb-16">
+             <section id="gemini-tools" class="mb-16 fade-in">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl font-bold text-white">Ferramentas com IA ✨</h2>
                     <p class="text-gray-300 mt-2">Use nossa inteligência artificial para obter análises e respostas instantâneas.</p>
@@ -115,6 +124,7 @@
                         <button id="analyze-btn" class="w-full mt-4 bg-[#06D6A0] text-[#073B4C] font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">Analisar com IA ✨</button>
                         <div id="analysis-loader" class="hidden justify-center mt-4"><div class="spinner"></div></div>
                         <div id="analysis-result" class="mt-4 p-4 bg-[#073B4C] rounded-lg text-gray-200 hidden"></div>
+                        <button id="copy-btn" class="w-full mt-4 bg-[#FFD166] text-[#073B4C] font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition-colors hidden">Copiar Análise 📋</button>
                     </div>
                     <div class="bg-[#118AB2] p-8 rounded-2xl shadow-2xl">
                         <h3 class="text-2xl font-bold mb-4 text-[#FFD166]">Consultor Virtual</h3>
@@ -127,7 +137,7 @@
                 </div>
             </section>
             
-            <section id="clients-values" class="mb-16">
+            <section id="clients-values" class="mb-16 fade-in">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="bg-[#118AB2] p-8 rounded-2xl shadow-2xl">
                         <h2 class="text-3xl font-bold text-center mb-6 text-white">Nosso Público-Alvo</h2>
@@ -147,7 +157,7 @@
                 </div>
             </section>
             
-            <section id="alternatives-docs" class="mb-16">
+            <section id="alternatives-docs" class="mb-16 fade-in">
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                      <div class="bg-[#073B4C] border-2 border-[#118AB2] p-8 rounded-2xl shadow-2xl text-center">
                         <h3 class="text-2xl font-bold mb-4 text-[#FFD166]">📘 Solução Alternativa "Faça Você Mesmo"</h3>
@@ -184,6 +194,7 @@
             const ticketText = document.getElementById('ticket-text');
             const analysisLoader = document.getElementById('analysis-loader');
             const analysisResult = document.getElementById('analysis-result');
+            const copyBtn = document.getElementById('copy-btn');
 
             const askBtn = document.getElementById('ask-btn');
             const consultantQuestion = document.getElementById('consultant-question');
@@ -193,6 +204,7 @@
             async function callGeminiAPI(payload, loader, resultElement, buttonElement) {
                 loader.style.display = 'flex';
                 resultElement.style.display = 'none';
+                if (resultElement === analysisResult) copyBtn.style.display = 'none';
                 buttonElement.disabled = true;
 
                 try {
@@ -218,6 +230,7 @@
                     
                     resultElement.innerHTML = formatResponseText(text);
                     resultElement.style.display = 'block';
+                    if (resultElement === analysisResult) copyBtn.style.display = 'block';
 
                 } catch (error) {
                     resultElement.innerText = 'Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.';
@@ -237,6 +250,7 @@
             }
 
             analyzeBtn.addEventListener('click', () => {
+                copyBtn.style.display = 'none';
                 const ticketContent = ticketText.value.trim();
                 if (!ticketContent) {
                     analysisResult.innerText = 'Por favor, insira o texto do auto de infração.';
@@ -271,6 +285,44 @@
                 };
 
                 callGeminiAPI(payload, consultantLoader, consultantResult, askBtn);
+            });
+
+            copyBtn.addEventListener('click', () => {
+                const textToCopy = analysisResult.innerText;
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    copyBtn.innerText = 'Copiado! ✅';
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                    copyBtn.innerText = 'Erro ao copiar';
+                }
+                document.body.removeChild(textArea);
+                setTimeout(() => {
+                    copyBtn.innerText = 'Copiar Análise 📋';
+                }, 2000);
+            });
+
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = {
+                threshold: 0.2,
+            };
+            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('visible');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
             });
 
             const tooltipTitleCallback = (tooltipItems) => {
@@ -364,5 +416,6 @@
 
 </body>
 </html>
+
 
 
