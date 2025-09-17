@@ -49,6 +49,20 @@
             opacity: 1;
             transform: translateY(0);
         }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-question.active + .faq-answer {
+            max-height: 200px; /* Adjust as needed */
+        }
+         .faq-question svg {
+            transition: transform 0.3s ease-out;
+        }
+        .faq-question.active svg {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body class="text-white antialiased">
@@ -119,8 +133,21 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="bg-[#118AB2] p-8 rounded-2xl shadow-2xl">
                         <h3 class="text-2xl font-bold mb-4 text-[#FFD166]">Analisador de Multa</h3>
-                        <p class="text-gray-200 mb-4">Cole o texto do seu auto de infração abaixo e nossa IA irá analisar em busca de possíveis erros para sua defesa.</p>
-                        <textarea id="ticket-text" rows="6" class="w-full p-3 rounded-lg bg-[#073B4C] text-white placeholder-gray-400 border-2 border-transparent focus:border-[#FFD166] focus:outline-none" placeholder="Cole o texto completo do auto de infração aqui..."></textarea>
+                        <p class="text-gray-200 mb-4">Envie uma foto do seu auto de infração ou cole o texto abaixo para nossa IA analisar em busca de possíveis erros para sua defesa.</p>
+                        
+                        <label for="ticket-image-upload" class="w-full cursor-pointer bg-[#073B4C] text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors flex items-center justify-center">
+                            <span>📷 Enviar Foto da Multa</span>
+                        </label>
+                        <input type="file" id="ticket-image-upload" class="hidden" accept="image/*">
+                        
+                        <div id="image-preview-container" class="hidden my-4 relative text-center">
+                            <img id="image-preview" class="max-h-48 w-auto inline-block rounded-lg" alt="Pré-visualização da Multa">
+                            <button id="remove-image-btn" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full h-7 w-7 flex items-center justify-center font-bold text-lg leading-none">&times;</button>
+                        </div>
+
+                        <div class="text-center my-2 text-gray-300">ou</div>
+
+                        <textarea id="ticket-text" rows="4" class="w-full p-3 rounded-lg bg-[#073B4C] text-white placeholder-gray-400 border-2 border-transparent focus:border-[#FFD166] focus:outline-none disabled:opacity-50" placeholder="Cole o texto completo do auto de infração aqui..."></textarea>
                         <button id="analyze-btn" class="w-full mt-4 bg-[#06D6A0] text-[#073B4C] font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">Analisar com IA ✨</button>
                         <div id="analysis-loader" class="hidden justify-center mt-4"><div class="spinner"></div></div>
                         <div id="analysis-result" class="mt-4 p-4 bg-[#073B4C] rounded-lg text-gray-200 hidden"></div>
@@ -155,6 +182,68 @@
                         </div>
                     </div>
                 </div>
+            </section>
+            
+            <section id="faq" class="mb-16 fade-in">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-white">Perguntas Frequentes (FAQ)</h2>
+                    <p class="text-gray-300 mt-2">Tire suas dúvidas mais comuns sobre o processo de defesa de multas e suspensão da CNH.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="bg-[#118AB2] rounded-2xl">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6 text-lg font-semibold text-white">
+                            <span>Quanto tempo leva o processo de defesa?</span>
+                            <svg class="w-6 h-6 text-[#FFD166]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-200">
+                            <p>O tempo pode variar. A via administrativa geralmente leva alguns meses, pois cada instância de defesa tem um prazo para julgar. Já o processo judicial pode ser mais longo, dependendo da complexidade do caso e da agilidade do sistema judiciário.</p>
+                        </div>
+                    </div>
+                    <div class="bg-[#118AB2] rounded-2xl">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6 text-lg font-semibold text-white">
+                            <span>Tenho garantia de que minha multa será cancelada?</span>
+                            <svg class="w-6 h-6 text-[#FFD166]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-200">
+                            <p>Não podemos garantir o resultado, pois a decisão final é dos órgãos de trânsito ou do juiz. O que garantimos é uma defesa técnica e bem fundamentada, utilizando todos os argumentos legais e processuais possíveis para aumentar ao máximo suas chances de sucesso.</p>
+                        </div>
+                    </div>
+                    <div class="bg-[#118AB2] rounded-2xl">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6 text-lg font-semibold text-white">
+                            <span>Posso continuar dirigindo durante o processo?</span>
+                            <svg class="w-6 h-6 text-[#FFD166]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-200">
+                            <p>Sim. Enquanto houver um recurso pendente de julgamento (seja na via administrativa ou judicial), a penalidade de suspensão não pode ser aplicada. Você pode continuar dirigindo normalmente até que o processo seja concluído em todas as instâncias.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="mb-16 fade-in">
+                 <div class="bg-[#073B4C] border-2 border-[#118AB2] p-8 rounded-2xl shadow-2xl max-w-3xl mx-auto">
+                     <h2 class="text-3xl font-bold text-center mb-2 text-white">Fale Conosco</h2>
+                     <p class="text-center text-gray-300 mb-6">Tem interesse em nossos serviços? Preencha o formulário abaixo e entraremos em contato o mais breve possível.</p>
+                     <form action="#" method="POST">
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                             <div>
+                                 <label for="name" class="block text-sm font-medium text-gray-200">Nome</label>
+                                 <input type="text" name="name" id="name" required class="mt-1 block w-full p-3 rounded-lg bg-[#118AB2] text-white border-2 border-transparent focus:border-[#FFD166] focus:outline-none">
+                             </div>
+                             <div>
+                                 <label for="contact-info" class="block text-sm font-medium text-gray-200">Email ou WhatsApp</label>
+                                 <input type="text" name="contact-info" id="contact-info" required class="mt-1 block w-full p-3 rounded-lg bg-[#118AB2] text-white border-2 border-transparent focus:border-[#FFD166] focus:outline-none">
+                             </div>
+                         </div>
+                         <div class="mt-6">
+                             <label for="message" class="block text-sm font-medium text-gray-200">Mensagem</label>
+                             <textarea name="message" id="message" rows="4" required class="mt-1 block w-full p-3 rounded-lg bg-[#118AB2] text-white border-2 border-transparent focus:border-[#FFD166] focus:outline-none" placeholder="Conte-nos brevemente sobre o seu caso..."></textarea>
+                         </div>
+                         <div class="mt-6 text-center">
+                            <button type="submit" class="w-full md:w-auto bg-[#FFD166] text-[#073B4C] font-bold py-3 px-10 rounded-lg hover:bg-opacity-90 transition-colors">Enviar Contato</button>
+                         </div>
+                     </form>
+                 </div>
             </section>
             
             <section id="alternatives-docs" class="mb-16 fade-in">
@@ -195,6 +284,13 @@
             const analysisLoader = document.getElementById('analysis-loader');
             const analysisResult = document.getElementById('analysis-result');
             const copyBtn = document.getElementById('copy-btn');
+            const ticketImageUpload = document.getElementById('ticket-image-upload');
+            const imagePreviewContainer = document.getElementById('image-preview-container');
+            const imagePreview = document.getElementById('image-preview');
+            const removeImageBtn = document.getElementById('remove-image-btn');
+
+            let base64ImageData = null;
+            let fileMimeType = null;
 
             const askBtn = document.getElementById('ask-btn');
             const consultantQuestion = document.getElementById('consultant-question');
@@ -249,24 +345,66 @@
                     .replace(/\n/g, '<br>'); // Newlines
             }
 
+            ticketImageUpload.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    fileMimeType = file.type;
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        base64ImageData = reader.result.split(',')[1];
+                        imagePreview.src = reader.result;
+                        imagePreviewContainer.style.display = 'block';
+                        ticketText.value = '';
+                        ticketText.disabled = true;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            removeImageBtn.addEventListener('click', () => {
+                base64ImageData = null;
+                fileMimeType = null;
+                imagePreview.src = '';
+                imagePreviewContainer.style.display = 'none';
+                ticketImageUpload.value = '';
+                ticketText.disabled = false;
+            });
+
             analyzeBtn.addEventListener('click', () => {
                 copyBtn.style.display = 'none';
                 const ticketContent = ticketText.value.trim();
-                if (!ticketContent) {
-                    analysisResult.innerText = 'Por favor, insira o texto do auto de infração.';
+
+                if (!ticketContent && !base64ImageData) {
+                    analysisResult.innerText = 'Por favor, insira o texto ou envie uma foto do auto de infração.';
                     analysisResult.style.display = 'block';
                     return;
                 }
+
                 const systemPrompt = "Você é um especialista em legislação de trânsito brasileira, com foco em Santa Catarina. Aja como um assistente que ajuda motoristas a entenderem suas multas. Seja objetivo e profissional.";
-                const userQuery = `Analise o seguinte texto de um auto de infração de trânsito. Identifique em tópicos curtos e claros, possíveis erros formais, inconsistências ou argumentos que poderiam ser usados em uma defesa administrativa. Se não encontrar erros óbvios, informe que o auto parece estar correto, mas que uma análise profissional é recomendada. Texto da multa: "${ticketContent}"`;
+                
+                const payloadParts = [];
+                if (base64ImageData) {
+                    const userQuery = "Analise a imagem deste auto de infração de trânsito. Transcreva o texto chave da multa e, em seguida, identifique em tópicos curtos e claros, possíveis erros formais, inconsistências ou argumentos que poderiam ser usados em uma defesa administrativa. Se não encontrar erros óbvios, informe que o auto parece estar correto, mas que uma análise profissional é recomendada.";
+                    payloadParts.push({ text: userQuery });
+                    payloadParts.push({
+                        inlineData: {
+                            mimeType: fileMimeType,
+                            data: base64ImageData
+                        }
+                    });
+                } else {
+                    const userQuery = `Analise o seguinte texto de um auto de infração de trânsito. Identifique em tópicos curtos e claros, possíveis erros formais, inconsistências ou argumentos que poderiam ser usados em uma defesa administrativa. Se não encontrar erros óbvios, informe que o auto parece estar correto, mas que uma análise profissional é recomendada. Texto da multa: "${ticketContent}"`;
+                    payloadParts.push({ text: userQuery });
+                }
                 
                 const payload = {
-                    contents: [{ parts: [{ text: userQuery }] }],
+                    contents: [{ parts: payloadParts }],
                     systemInstruction: { parts: [{ text: systemPrompt }] },
                 };
 
                 callGeminiAPI(payload, analysisLoader, analysisResult, analyzeBtn);
             });
+
 
             askBtn.addEventListener('click', () => {
                 const question = consultantQuestion.value.trim();
@@ -325,6 +463,17 @@
                 appearOnScroll.observe(fader);
             });
 
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const currentlyActive = document.querySelector('.faq-question.active');
+                    if (currentlyActive && currentlyActive !== question) {
+                        currentlyActive.classList.remove('active');
+                    }
+                    question.classList.toggle('active');
+                });
+            });
+
             const tooltipTitleCallback = (tooltipItems) => {
                 const item = tooltipItems[0];
                 let label = item.chart.data.labels[item.dataIndex];
@@ -362,7 +511,7 @@
                     labels: ['Motoristas Profissionais', 'Dependentes do Veículo', 'Condutores com Multas Graves'],
                     datasets: [{
                         label: 'Perfil de Clientes',
-                        data: [33.3, 33.3, 33.3],
+                        data: [45, 35, 20],
                         backgroundColor: ['#FF6B6B', '#FFD166', '#06D6A0'],
                         borderColor: '#118AB2',
                         borderWidth: 3
@@ -416,6 +565,3 @@
 
 </body>
 </html>
-
-
-
